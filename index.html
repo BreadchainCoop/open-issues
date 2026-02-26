@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breadchain Coop - Issues for CS Masters Students (2-3 Week Projects)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e8e8e8;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .slide {
+            display: none;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 60px 80px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Title Slide */
+        .title-slide {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+        }
+
+        .title-slide h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .title-slide h2 {
+            font-size: 2rem;
+            color: #a8a8a8;
+            margin-bottom: 40px;
+        }
+
+        .title-slide .subtitle {
+            font-size: 1.3rem;
+            color: #7f8c8d;
+            max-width: 800px;
+        }
+
+        /* Issue Slides */
+        .issue-slide {
+            background: linear-gradient(180deg, #1a1a2e 0%, #0f0f1a 100%);
+        }
+
+        .issue-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .repo-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .issue-number {
+            color: #f5576c;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .issue-title {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            color: #fff;
+            line-height: 1.3;
+        }
+
+        .issue-title a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 2px solid #667eea;
+            transition: border-color 0.3s;
+        }
+
+        .issue-title a:hover {
+            border-color: #f5576c;
+        }
+
+        .issue-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section h3 {
+            font-size: 1.2rem;
+            color: #f093fb;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h3::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        .section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #c8c8c8;
+        }
+
+        .section li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .case-section {
+            grid-column: span 2;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        }
+
+        .case-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+        }
+
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .skill-tag {
+            background: rgba(245, 87, 108, 0.2);
+            color: #f5576c;
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(245, 87, 108, 0.3);
+        }
+
+        /* Navigation */
+        .nav-controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
+        }
+
+        .slide-counter {
+            color: #7f8c8d;
+            font-size: 1rem;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #f5576c 100%);
+            transition: width 0.3s;
+        }
+
+        /* Summary Slide */
+        .summary-slide {
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+        }
+
+        .summary-slide h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            text-align: center;
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .summary-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px);
+            border-color: #667eea;
+        }
+
+        .summary-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .summary-card h4 a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .summary-card .repo {
+            font-size: 0.85rem;
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+
+        .summary-card p {
+            font-size: 0.9rem;
+            color: #a8a8a8;
+        }
+
+        .keyboard-hint {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #555;
+            font-size: 0.85rem;
+        }
+
+        /* Rating Slide */
+        .rating-slide {
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            overflow-y: auto;
+        }
+
+        .rating-slide h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .rating-slide .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .rating-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 20px;
+        }
+
+        .rating-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .rating-card .repo {
+            font-size: 0.8rem;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .rating-card h4 {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .rating-card h4 a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            font-size: 1.8rem;
+            color: #444;
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #f5576c;
+        }
+
+        .star-rating input:checked ~ label {
+            color: #444;
+        }
+
+        .star-rating input:checked + label,
+        .star-rating input:checked + label ~ label:not(:has(~ input:checked)) {
+            color: #f5576c;
+        }
+
+        .star-rating:has(input:checked) label {
+            color: #444;
+        }
+
+        .star-rating label.active {
+            color: #f5576c !important;
+        }
+
+        .copy-section {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .copy-btn.copied {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .copy-feedback {
+            margin-top: 15px;
+            color: #38ef7d;
+            font-size: 0.95rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .copy-feedback.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress"></div>
+
+    <div class="slideshow-container">
+        <!-- Slide 1: Title -->
+        <div class="slide title-slide active">
+            <h1>Breadchain Coop</h1>
+            <h2>Open Source Opportunities for CS Masters Students</h2>
+            <p class="subtitle">
+                Curated issues from safety-net, crowdstake.fun, and stacks repositories.<br>
+                Each project is scoped for 2-3 weeks of focused development work.
+            </p>
+        </div>
+
+        <!-- Slide 2: Issue 1 - Fuzz Testing -->
+        <div class="slide issue-slide">
+            <div class="issue-header">
+                <span class="repo-badge">crowdstake.fun</span>
+                <span class="issue-number">#64</span>
+            </div>
+            <h2 class="issue-title">
+                <a href="https://github.com/BreadchainCoop/crowdstake.fun/issues/64" target="_blank">
+                    Add Fuzz Testing to BreadKit Protocol
+                </a>
+            </h2>
+            <div class="issue-content">
+                <div class="section">
+                    <h3>Problem</h3>
+                    <ul>
+                        <li>Current tests use hardcoded values only</li>
+                        <li>Limited edge case coverage</li>
+                        <li>No systematic invariant testing</li>
+                        <li>Risk of undiscovered vulnerabilities in arithmetic operations</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h3>Deliverables</h3>
+                    <ul>
+                        <li>Token minting/burning fuzz tests</li>
+                        <li>Cycle transition invariant tests</li>
+                        <li>Yield distribution fuzz tests</li>
+                        <li>Voting power calculation tests</li>
+                        <li>Stateful protocol fuzz tests</li>
+                    </ul>
+                </div>
+                <div class="section case-section">
+                    <h3>Why This Issue?</h3>
+                    <p>
+                        This is an <strong>excellent learning opportunity</strong> for mastering smart contract security testing.
+                        The issue comes with comprehensive documentation including Mermaid diagrams, code snippets, and clear phases.
+                        You'll gain hands-on experience with Foundry's fuzzing capabilities, property-based testing, and invariant validation -
+                        skills highly valued in Web3 security. The scope is well-defined with 6 implementation phases that fit perfectly in 2-3 weeks.
+                    </p>
+                    <div class="skills-tags">
+                        <span class="skill-tag">Solidity</span>
+                        <span class="skill-tag">Foundry</span>
+                        <span class="skill-tag">Fuzz Testing</span>
+                        <span class="skill-tag">Security</span>
+                        <span class="skill-tag">Smart Contracts</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Issue 2 - NFT Module -->
+        <div class="slide issue-slide">
+            <div class="issue-header">
+                <span class="repo-badge">crowdstake.fun</span>
+                <span class="issue-number">#24</span>
+            </div>
+            <h2 class="issue-title">
+                <a href="https://github.com/BreadchainCoop/crowdstake.fun/issues/24" target="_blank">
+                    Add Generic NFT Awarding and Burning Module for Token Holders
+                </a>
+            </h2>
+            <div class="issue-content">
+                <div class="section">
+                    <h3>Problem</h3>
+                    <ul>
+                        <li>No built-in NFT rewards for engaged users</li>
+                        <li>Manual recognition of token holders</li>
+                        <li>No automated incentive mechanism</li>
+                        <li>Missing integration with distribution workflows</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h3>Deliverables</h3>
+                    <ul>
+                        <li>DistributionNFTModule contract</li>
+                        <li>Eligibility checking based on holdings</li>
+                        <li>Mint NFTs to qualifying users</li>
+                        <li>Burn NFTs when criteria not met</li>
+                        <li>Configurable thresholds and metadata</li>
+                    </ul>
+                </div>
+                <div class="section case-section">
+                    <h3>Why This Issue?</h3>
+                    <p>
+                        This is a <strong>feature-complete module implementation</strong> that teaches you NFT integration patterns.
+                        You'll build a reusable component that bridges ERC20 and ERC721 standards - a common DeFi pattern for gamification
+                        and community rewards. The issue includes class and sequence diagrams plus a Solidity skeleton to get started.
+                        Perfect for learning modular smart contract design and NFT mechanics in a production context.
+                    </p>
+                    <div class="skills-tags">
+                        <span class="skill-tag">Solidity</span>
+                        <span class="skill-tag">ERC721</span>
+                        <span class="skill-tag">ERC20</span>
+                        <span class="skill-tag">DeFi</span>
+                        <span class="skill-tag">Module Design</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Issue 3 - Factory Pattern -->
+        <div class="slide issue-slide">
+            <div class="issue-header">
+                <span class="repo-badge">crowdstake.fun</span>
+                <span class="issue-number">#36</span>
+            </div>
+            <h2 class="issue-title">
+                <a href="https://github.com/BreadchainCoop/crowdstake.fun/issues/36" target="_blank">
+                    Refactor All Modules and Manager to Factory Pattern
+                </a>
+            </h2>
+            <div class="issue-content">
+                <div class="section">
+                    <h3>Problem</h3>
+                    <ul>
+                        <li>Inconsistent instantiation across modules</li>
+                        <li>Code duplication in initialization</li>
+                        <li>Complex testing and deployment</li>
+                        <li>BaseToken already migrated, others lag behind</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h3>Deliverables</h3>
+                    <ul>
+                        <li>Factory contracts for all modules</li>
+                        <li>Standardized construction and initialization</li>
+                        <li>Unified dependency injection</li>
+                        <li>Updated documentation and tests</li>
+                        <li>Manager factory integration</li>
+                    </ul>
+                </div>
+                <div class="section case-section">
+                    <h3>Why This Issue?</h3>
+                    <p>
+                        This is a <strong>software architecture refactoring project</strong> that demonstrates design pattern expertise.
+                        The Factory Pattern is fundamental in enterprise software and smart contract development. You'll unify an entire
+                        codebase's instantiation logic, improving maintainability and testability. The issue has clear acceptance criteria
+                        and UML diagrams. This work directly mirrors what senior engineers do when improving legacy codebases.
+                    </p>
+                    <div class="skills-tags">
+                        <span class="skill-tag">Design Patterns</span>
+                        <span class="skill-tag">Refactoring</span>
+                        <span class="skill-tag">Solidity</span>
+                        <span class="skill-tag">Architecture</span>
+                        <span class="skill-tag">Testing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Issue 4 - Fee-on-Transfer Bug -->
+        <div class="slide issue-slide">
+            <div class="issue-header">
+                <span class="repo-badge">stacks (saving-circles)</span>
+                <span class="issue-number">#122</span>
+            </div>
+            <h2 class="issue-title">
+                <a href="https://github.com/BreadchainCoop/saving-circles/issues/122" target="_blank">
+                    Fee-on-Transfer / Rebasing ERC20s Break Deposit Accounting
+                </a>
+            </h2>
+            <div class="issue-content">
+                <div class="section">
+                    <h3>Problem</h3>
+                    <ul>
+                        <li>Deposits credited with requested value, not actual received</li>
+                        <li>Fee-on-transfer tokens cause under-collateralization</li>
+                        <li>Cross-circle fund contamination possible</li>
+                        <li>Can cause insolvency/reverts locking user funds</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h3>Deliverables</h3>
+                    <ul>
+                        <li>Normalize deposit accounting to actual received</li>
+                        <li>balanceAfter - balanceBefore pattern implementation</li>
+                        <li>Policy documentation for token allowlisting</li>
+                        <li>Per-circle escrow isolation consideration</li>
+                        <li>Comprehensive test coverage</li>
+                    </ul>
+                </div>
+                <div class="section case-section">
+                    <h3>Why This Issue?</h3>
+                    <p>
+                        This is a <strong>high-severity security bug</strong> with clear remediation steps - perfect for learning vulnerability analysis.
+                        The issue demonstrates a classic ERC20 edge case that has caused real losses in DeFi protocols. You'll learn defensive
+                        programming patterns, understand token transfer mechanics deeply, and gain experience writing security-critical code.
+                        The proof of concept and affected code locations are clearly documented, making this accessible yet impactful.
+                    </p>
+                    <div class="skills-tags">
+                        <span class="skill-tag">Security</span>
+                        <span class="skill-tag">ERC20</span>
+                        <span class="skill-tag">Solidity</span>
+                        <span class="skill-tag">DeFi</span>
+                        <span class="skill-tag">Vulnerability Fix</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Issue 5 - Contestation Threshold -->
+        <div class="slide issue-slide">
+            <div class="issue-header">
+                <span class="repo-badge">safety-net</span>
+                <span class="issue-number">#14</span>
+            </div>
+            <h2 class="issue-title">
+                <a href="https://github.com/BreadchainCoop/safety-net/issues/14" target="_blank">
+                    Change Contestation Threshold Logic for Withdrawal Approval
+                </a>
+            </h2>
+            <div class="issue-content">
+                <div class="section">
+                    <h3>Current Behavior</h3>
+                    <ul>
+                        <li>Any contest triggers voting phase</li>
+                        <li>Requires all members to vote</li>
+                        <li>66% yes votes needed for approval</li>
+                        <li>Can stall on low participation</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h3>Proposed Change</h3>
+                    <ul>
+                        <li>Auto-approve unless >33% contest</li>
+                        <li>No voting phase needed</li>
+                        <li>Simpler, faster withdrawals</li>
+                        <li>Minority can still block bad actors</li>
+                    </ul>
+                </div>
+                <div class="section case-section">
+                    <h3>Why This Issue?</h3>
+                    <p>
+                        This is a <strong>governance mechanism redesign</strong> that teaches you about on-chain voting systems.
+                        The issue includes before/after Mermaid sequence diagrams showing the exact flow changes. You'll implement
+                        threshold-based approval logic, handle edge cases like abstentions and member churn, and consider Sybil attack
+                        resistance. This is practical experience with DAO governance patterns used in major protocols.
+                    </p>
+                    <div class="skills-tags">
+                        <span class="skill-tag">Governance</span>
+                        <span class="skill-tag">Solidity</span>
+                        <span class="skill-tag">Voting Systems</span>
+                        <span class="skill-tag">Game Theory</span>
+                        <span class="skill-tag">Security</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Issue 6 - Allowance-Based Deposits -->
+        <div class="slide issue-slide">
+            <div class="issue-header">
+                <span class="repo-badge">safety-net</span>
+                <span class="issue-number">#32</span>
+            </div>
+            <h2 class="issue-title">
+                <a href="https://github.com/BreadchainCoop/safety-net/issues/32" target="_blank">
+                    Automated ERC20 Allowance-Based Deposits and Batch Account Abstraction
+                </a>
+            </h2>
+            <div class="issue-content">
+                <div class="section">
+                    <h3>Problem</h3>
+                    <ul>
+                        <li>Deposits must be initiated manually</li>
+                        <li>Limits automation and scalability</li>
+                        <li>No batch operations for DAOs/automated agents</li>
+                        <li>No view method for eligible auto-deposit addresses</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h3>Deliverables</h3>
+                    <ul>
+                        <li>depositIfAllowed(circle, user) function</li>
+                        <li>getEligibleAddressesForDeposit() view method</li>
+                        <li>batchDepositIfAllowed() for multiple users</li>
+                        <li>Allowance validation logic</li>
+                        <li>Sequence diagrams provided in issue</li>
+                    </ul>
+                </div>
+                <div class="section case-section">
+                    <h3>Why This Issue?</h3>
+                    <p>
+                        This issue introduces you to <strong>account abstraction patterns</strong> and DeFi automation. You'll implement
+                        allowance-based operations that enable programmatic interactions - a fundamental pattern in modern DeFi. The issue
+                        includes complete sequence diagrams and example code snippets, making implementation straightforward. You'll learn
+                        about ERC20 allowances, batch operations, and how protocols scale through automation. Great resume material.
+                    </p>
+                    <div class="skills-tags">
+                        <span class="skill-tag">ERC20</span>
+                        <span class="skill-tag">Account Abstraction</span>
+                        <span class="skill-tag">Batch Operations</span>
+                        <span class="skill-tag">Solidity</span>
+                        <span class="skill-tag">DeFi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Issue 7 - Test Quality -->
+        <div class="slide issue-slide">
+            <div class="issue-header">
+                <span class="repo-badge">safety-net</span>
+                <span class="issue-number">#56</span>
+            </div>
+            <h2 class="issue-title">
+                <a href="https://github.com/BreadchainCoop/safety-net/issues/56" target="_blank">
+                    Improve Fuzz and Unit Test Quality
+                </a>
+            </h2>
+            <div class="issue-content">
+                <div class="section">
+                    <h3>Problem</h3>
+                    <ul>
+                        <li>Recent fixes revealed tests missed critical regressions</li>
+                        <li>Fuzz test naming needs improvement</li>
+                        <li>Test coverage gaps in critical paths</li>
+                        <li>Test readability needs enhancement</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h3>Deliverables</h3>
+                    <ul>
+                        <li>Audit existing test coverage</li>
+                        <li>Improve fuzz test naming conventions</li>
+                        <li>Add tests for uncovered critical paths</li>
+                        <li>Enhance test readability and documentation</li>
+                        <li>Ensure future regressions are caught</li>
+                    </ul>
+                </div>
+                <div class="section case-section">
+                    <h3>Why This Issue?</h3>
+                    <p>
+                        This is a <strong>test engineering deep-dive</strong> that teaches you how production codebases maintain quality.
+                        You'll analyze why existing tests failed to catch bugs, then systematically improve coverage. This develops critical
+                        thinking about edge cases and teaches professional testing practices. The work directly improves a real protocol's
+                        security posture. Test engineering skills are often undervalued but crucial in industry - this showcases that ability.
+                    </p>
+                    <div class="skills-tags">
+                        <span class="skill-tag">Testing</span>
+                        <span class="skill-tag">Foundry</span>
+                        <span class="skill-tag">Quality Assurance</span>
+                        <span class="skill-tag">Solidity</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Issue 8 - Voting Module -->
+        <div class="slide issue-slide">
+            <div class="issue-header">
+                <span class="repo-badge">crowdstake.fun</span>
+                <span class="issue-number">#2</span>
+            </div>
+            <h2 class="issue-title">
+                <a href="https://github.com/BreadchainCoop/crowdstake.fun/issues/2" target="_blank">
+                    Implement Voting Module with Signature-Based Voting
+                </a>
+            </h2>
+            <div class="issue-content">
+                <div class="section">
+                    <h3>Scope</h3>
+                    <ul>
+                        <li>EIP-712 signature verification for votes</li>
+                        <li>Multiple voting power strategies</li>
+                        <li>Time-weighted voting power calculations</li>
+                        <li>Batch vote submission support</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h3>Deliverables</h3>
+                    <ul>
+                        <li>VotingModule main contract</li>
+                        <li>IVotingPowerStrategy interface</li>
+                        <li>TokenBasedVotingPower strategy</li>
+                        <li>TimeWeightedVotingPower strategy</li>
+                        <li>SignatureVerifier utility</li>
+                    </ul>
+                </div>
+                <div class="section case-section">
+                    <h3>Why This Issue?</h3>
+                    <p>
+                        This is a <strong>core governance infrastructure implementation</strong> with extensive documentation. You'll implement
+                        EIP-712 signing (an essential Web3 standard), design strategy patterns for voting power, and build meta-transaction
+                        support for gasless voting. The issue includes complete class diagrams, sequence diagrams, and reference implementations
+                        from the Breadchain codebase. This is substantial but well-documented - perfect for diving deep into governance systems.
+                    </p>
+                    <div class="skills-tags">
+                        <span class="skill-tag">EIP-712</span>
+                        <span class="skill-tag">Governance</span>
+                        <span class="skill-tag">Strategy Pattern</span>
+                        <span class="skill-tag">Solidity</span>
+                        <span class="skill-tag">Cryptography</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Summary -->
+        <div class="slide summary-slide">
+            <h2>Summary: All Opportunities</h2>
+            <div class="summary-grid">
+                <div class="summary-card">
+                    <div class="repo">crowdstake.fun #64</div>
+                    <h4><a href="https://github.com/BreadchainCoop/crowdstake.fun/issues/64" target="_blank">Add Fuzz Testing to BreadKit Protocol</a></h4>
+                    <p>Build comprehensive property-based testing for smart contract security</p>
+                </div>
+                <div class="summary-card">
+                    <div class="repo">crowdstake.fun #24</div>
+                    <h4><a href="https://github.com/BreadchainCoop/crowdstake.fun/issues/24" target="_blank">NFT Awarding Module</a></h4>
+                    <p>Build a reusable NFT rewards module for token holder incentives</p>
+                </div>
+                <div class="summary-card">
+                    <div class="repo">crowdstake.fun #36</div>
+                    <h4><a href="https://github.com/BreadchainCoop/crowdstake.fun/issues/36" target="_blank">Factory Pattern Refactor</a></h4>
+                    <p>Unify codebase with factory pattern for all modules and manager</p>
+                </div>
+                <div class="summary-card">
+                    <div class="repo">stacks #122</div>
+                    <h4><a href="https://github.com/BreadchainCoop/saving-circles/issues/122" target="_blank">Fix Fee-on-Transfer Accounting</a></h4>
+                    <p>Security bug fix for ERC20 edge cases causing fund loss</p>
+                </div>
+                <div class="summary-card">
+                    <div class="repo">safety-net #14</div>
+                    <h4><a href="https://github.com/BreadchainCoop/safety-net/issues/14" target="_blank">Contestation Threshold Logic</a></h4>
+                    <p>Redesign withdrawal approval governance from voting to threshold-based</p>
+                </div>
+                <div class="summary-card">
+                    <div class="repo">safety-net #32</div>
+                    <h4><a href="https://github.com/BreadchainCoop/safety-net/issues/32" target="_blank">Allowance-Based Deposits</a></h4>
+                    <p>Account abstraction patterns for automated DeFi operations</p>
+                </div>
+                <div class="summary-card">
+                    <div class="repo">safety-net #56</div>
+                    <h4><a href="https://github.com/BreadchainCoop/safety-net/issues/56" target="_blank">Improve Test Quality</a></h4>
+                    <p>Enhance fuzz and unit test coverage for regression prevention</p>
+                </div>
+                <div class="summary-card">
+                    <div class="repo">crowdstake.fun #2</div>
+                    <h4><a href="https://github.com/BreadchainCoop/crowdstake.fun/issues/2" target="_blank">Voting Module Implementation</a></h4>
+                    <p>EIP-712 signature voting with multiple power strategies</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Rating -->
+        <div class="slide rating-slide">
+            <h2>Rate Your Interest</h2>
+            <p class="subtitle">Score each issue from 1-5 based on your interest level</p>
+            <div class="rating-grid">
+                <div class="rating-card" data-issue="crowdstake.fun #64" data-title="Add Fuzz Testing to BreadKit Protocol" data-url="https://github.com/BreadchainCoop/crowdstake.fun/issues/64">
+                    <div class="repo">crowdstake.fun #64</div>
+                    <h4><a href="https://github.com/BreadchainCoop/crowdstake.fun/issues/64" target="_blank">Add Fuzz Testing to BreadKit Protocol</a></h4>
+                    <div class="star-rating" data-rating="0">
+                        <span class="star" data-value="1">1</span>
+                        <span class="star" data-value="2">2</span>
+                        <span class="star" data-value="3">3</span>
+                        <span class="star" data-value="4">4</span>
+                        <span class="star" data-value="5">5</span>
+                    </div>
+                </div>
+                <div class="rating-card" data-issue="crowdstake.fun #24" data-title="NFT Awarding Module" data-url="https://github.com/BreadchainCoop/crowdstake.fun/issues/24">
+                    <div class="repo">crowdstake.fun #24</div>
+                    <h4><a href="https://github.com/BreadchainCoop/crowdstake.fun/issues/24" target="_blank">NFT Awarding Module</a></h4>
+                    <div class="star-rating" data-rating="0">
+                        <span class="star" data-value="1">1</span>
+                        <span class="star" data-value="2">2</span>
+                        <span class="star" data-value="3">3</span>
+                        <span class="star" data-value="4">4</span>
+                        <span class="star" data-value="5">5</span>
+                    </div>
+                </div>
+                <div class="rating-card" data-issue="crowdstake.fun #36" data-title="Factory Pattern Refactor" data-url="https://github.com/BreadchainCoop/crowdstake.fun/issues/36">
+                    <div class="repo">crowdstake.fun #36</div>
+                    <h4><a href="https://github.com/BreadchainCoop/crowdstake.fun/issues/36" target="_blank">Factory Pattern Refactor</a></h4>
+                    <div class="star-rating" data-rating="0">
+                        <span class="star" data-value="1">1</span>
+                        <span class="star" data-value="2">2</span>
+                        <span class="star" data-value="3">3</span>
+                        <span class="star" data-value="4">4</span>
+                        <span class="star" data-value="5">5</span>
+                    </div>
+                </div>
+                <div class="rating-card" data-issue="stacks #122" data-title="Fix Fee-on-Transfer Accounting" data-url="https://github.com/BreadchainCoop/saving-circles/issues/122">
+                    <div class="repo">stacks #122</div>
+                    <h4><a href="https://github.com/BreadchainCoop/saving-circles/issues/122" target="_blank">Fix Fee-on-Transfer Accounting</a></h4>
+                    <div class="star-rating" data-rating="0">
+                        <span class="star" data-value="1">1</span>
+                        <span class="star" data-value="2">2</span>
+                        <span class="star" data-value="3">3</span>
+                        <span class="star" data-value="4">4</span>
+                        <span class="star" data-value="5">5</span>
+                    </div>
+                </div>
+                <div class="rating-card" data-issue="safety-net #14" data-title="Contestation Threshold Logic" data-url="https://github.com/BreadchainCoop/safety-net/issues/14">
+                    <div class="repo">safety-net #14</div>
+                    <h4><a href="https://github.com/BreadchainCoop/safety-net/issues/14" target="_blank">Contestation Threshold Logic</a></h4>
+                    <div class="star-rating" data-rating="0">
+                        <span class="star" data-value="1">1</span>
+                        <span class="star" data-value="2">2</span>
+                        <span class="star" data-value="3">3</span>
+                        <span class="star" data-value="4">4</span>
+                        <span class="star" data-value="5">5</span>
+                    </div>
+                </div>
+                <div class="rating-card" data-issue="safety-net #32" data-title="Allowance-Based Deposits" data-url="https://github.com/BreadchainCoop/safety-net/issues/32">
+                    <div class="repo">safety-net #32</div>
+                    <h4><a href="https://github.com/BreadchainCoop/safety-net/issues/32" target="_blank">Allowance-Based Deposits</a></h4>
+                    <div class="star-rating" data-rating="0">
+                        <span class="star" data-value="1">1</span>
+                        <span class="star" data-value="2">2</span>
+                        <span class="star" data-value="3">3</span>
+                        <span class="star" data-value="4">4</span>
+                        <span class="star" data-value="5">5</span>
+                    </div>
+                </div>
+                <div class="rating-card" data-issue="safety-net #56" data-title="Improve Test Quality" data-url="https://github.com/BreadchainCoop/safety-net/issues/56">
+                    <div class="repo">safety-net #56</div>
+                    <h4><a href="https://github.com/BreadchainCoop/safety-net/issues/56" target="_blank">Improve Test Quality</a></h4>
+                    <div class="star-rating" data-rating="0">
+                        <span class="star" data-value="1">1</span>
+                        <span class="star" data-value="2">2</span>
+                        <span class="star" data-value="3">3</span>
+                        <span class="star" data-value="4">4</span>
+                        <span class="star" data-value="5">5</span>
+                    </div>
+                </div>
+                <div class="rating-card" data-issue="crowdstake.fun #2" data-title="Voting Module Implementation" data-url="https://github.com/BreadchainCoop/crowdstake.fun/issues/2">
+                    <div class="repo">crowdstake.fun #2</div>
+                    <h4><a href="https://github.com/BreadchainCoop/crowdstake.fun/issues/2" target="_blank">Voting Module Implementation</a></h4>
+                    <div class="star-rating" data-rating="0">
+                        <span class="star" data-value="1">1</span>
+                        <span class="star" data-value="2">2</span>
+                        <span class="star" data-value="3">3</span>
+                        <span class="star" data-value="4">4</span>
+                        <span class="star" data-value="5">5</span>
+                    </div>
+                </div>
+            </div>
+            <div class="copy-section">
+                <button class="copy-btn" onclick="copyResults()">Copy Results to Clipboard</button>
+                <p class="copy-feedback" id="copyFeedback">Copied to clipboard!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="keyboard-hint">Use arrow keys or buttons to navigate</div>
+
+    <div class="nav-controls">
+        <button class="nav-btn" onclick="changeSlide(-1)">Previous</button>
+        <span class="slide-counter"><span id="current">1</span> / <span id="total">11</span></span>
+        <button class="nav-btn" onclick="changeSlide(1)">Next</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('total').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current').textContent = currentSlide + 1;
+            document.getElementById('progress').style.width = ((currentSlide + 1) / totalSlides * 100) + '%';
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                changeSlide(1);
+            } else if (e.key === 'ArrowLeft') {
+                changeSlide(-1);
+            }
+        });
+
+        // Star rating functionality
+        document.querySelectorAll('.star-rating').forEach(ratingContainer => {
+            const stars = ratingContainer.querySelectorAll('.star');
+
+            stars.forEach(star => {
+                star.addEventListener('click', () => {
+                    const value = parseInt(star.dataset.value);
+                    ratingContainer.dataset.rating = value;
+
+                    stars.forEach(s => {
+                        if (parseInt(s.dataset.value) <= value) {
+                            s.classList.add('active');
+                        } else {
+                            s.classList.remove('active');
+                        }
+                    });
+                });
+
+                star.addEventListener('mouseenter', () => {
+                    const value = parseInt(star.dataset.value);
+                    stars.forEach(s => {
+                        if (parseInt(s.dataset.value) <= value) {
+                            s.style.color = '#f5576c';
+                        }
+                    });
+                });
+
+                star.addEventListener('mouseleave', () => {
+                    const currentRating = parseInt(ratingContainer.dataset.rating) || 0;
+                    stars.forEach(s => {
+                        if (parseInt(s.dataset.value) <= currentRating) {
+                            s.style.color = '#f5576c';
+                        } else {
+                            s.style.color = '#444';
+                        }
+                    });
+                });
+            });
+        });
+
+        // Add CSS for stars
+        const style = document.createElement('style');
+        style.textContent = `
+            .star {
+                display: inline-block;
+                width: 36px;
+                height: 36px;
+                line-height: 36px;
+                text-align: center;
+                background: rgba(255,255,255,0.1);
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.2s;
+                font-weight: bold;
+                color: #444;
+            }
+            .star:hover {
+                transform: scale(1.1);
+                background: rgba(245, 87, 108, 0.2);
+            }
+            .star.active {
+                color: #f5576c !important;
+                background: rgba(245, 87, 108, 0.2);
+            }
+        `;
+        document.head.appendChild(style);
+
+        function copyResults() {
+            const cards = document.querySelectorAll('.rating-card');
+            let markdown = '| Issue | Title | Interest (1-5) | Link |\n';
+            markdown += '|-------|-------|----------------|------|\n';
+
+            cards.forEach(card => {
+                const issue = card.dataset.issue;
+                const title = card.dataset.title;
+                const url = card.dataset.url;
+                const rating = card.querySelector('.star-rating').dataset.rating || '0';
+                const stars = rating > 0 ? rating : '-';
+                markdown += `| ${issue} | ${title} | ${stars} | [Link](${url}) |\n`;
+            });
+
+            navigator.clipboard.writeText(markdown).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const feedback = document.getElementById('copyFeedback');
+
+                btn.classList.add('copied');
+                btn.textContent = 'Copied!';
+                feedback.classList.add('show');
+
+                setTimeout(() => {
+                    btn.classList.remove('copied');
+                    btn.textContent = 'Copy Results to Clipboard';
+                    feedback.classList.remove('show');
+                }, 2000);
+            });
+        }
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
