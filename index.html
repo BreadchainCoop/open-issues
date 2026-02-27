@@ -25,6 +25,12 @@
             box-sizing: border-box;
         }
 
+        button, .nav-star {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            cursor: pointer;
+        }
+
         body {
             font-family: 'Roboto', sans-serif;
             background: var(--bread-cream);
@@ -1273,35 +1279,14 @@
         }
 
         navStars.forEach(star => {
-            // Handle both click and touch
-            star.addEventListener('click', (e) => {
-                e.preventDefault();
-                handleStarRating(parseInt(star.dataset.value));
-            });
-
-            star.addEventListener('touchend', (e) => {
-                e.preventDefault();
+            star.addEventListener('click', () => {
                 handleStarRating(parseInt(star.dataset.value));
             });
         });
 
         // Navigation button handlers
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-
-        prevBtn.addEventListener('click', () => changeSlide(-1));
-        nextBtn.addEventListener('click', () => changeSlide(1));
-
-        // Touch support for nav buttons
-        prevBtn.addEventListener('touchend', (e) => {
-            e.preventDefault();
-            changeSlide(-1);
-        });
-
-        nextBtn.addEventListener('touchend', (e) => {
-            e.preventDefault();
-            changeSlide(1);
-        });
+        document.getElementById('prevBtn').addEventListener('click', () => changeSlide(-1));
+        document.getElementById('nextBtn').addEventListener('click', () => changeSlide(1));
 
         function renderSummary() {
             const grid = document.getElementById('summaryGrid');
