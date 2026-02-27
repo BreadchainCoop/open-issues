@@ -248,66 +248,72 @@
             font-weight: 500;
         }
 
-        .rating-section {
-            grid-column: span 2;
-            background: var(--bread-dark);
-            border-radius: 8px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .rating-section .rating-label {
-            color: var(--bread-cream);
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        .rating-section .rating-label span {
-            color: var(--bread-orange);
-        }
-
-        .star-rating {
-            display: flex;
-            gap: 10px;
-        }
-
-        .star {
-            display: inline-block;
-            width: 44px;
-            height: 44px;
-            line-height: 44px;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-weight: 600;
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        .star:hover {
-            transform: scale(1.08);
-            background: rgba(232, 111, 44, 0.3);
-            color: var(--bread-orange);
-        }
-
-        .star.active {
-            color: var(--bread-orange) !important;
-            background: rgba(232, 111, 44, 0.3);
-        }
-
         .nav-controls {
             position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
+            bottom: 0;
+            left: 0;
+            right: 0;
             display: flex;
             gap: 20px;
             align-items: center;
+            justify-content: center;
             z-index: 100;
+            background: var(--bread-dark);
+            padding: 15px 20px;
+        }
+
+        .nav-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-rating {
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-rating.show {
+            display: flex;
+        }
+
+        .nav-rating-label {
+            color: var(--bread-cream);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .nav-star-rating {
+            display: flex;
+            gap: 6px;
+        }
+
+        .nav-star {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            line-height: 36px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .nav-star:hover {
+            transform: scale(1.08);
+            background: rgba(232, 111, 44, 0.4);
+            color: var(--bread-orange);
+        }
+
+        .nav-star.active {
+            color: var(--bread-orange);
+            background: rgba(232, 111, 44, 0.4);
         }
 
         .nav-btn {
@@ -324,8 +330,8 @@
         }
 
         .nav-btn:hover:not(:disabled) {
-            background: var(--bread-dark);
-            color: var(--bread-cream);
+            background: var(--bread-cream);
+            color: var(--bread-dark);
         }
 
         .nav-btn:disabled {
@@ -345,8 +351,8 @@
         }
 
         .slide-counter {
-            color: var(--bread-text-light);
-            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
             font-weight: 500;
         }
 
@@ -489,18 +495,6 @@
             font-size: 0.8rem;
         }
 
-        .rating-required-hint {
-            color: var(--bread-orange);
-            font-size: 0.85rem;
-            margin-left: 10px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .rating-required-hint.show {
-            opacity: 1;
-        }
-
         /* Mobile Styles */
         @media (max-width: 768px) {
             .slide {
@@ -609,58 +603,42 @@
                 font-size: 0.7rem;
             }
 
-            .rating-section {
-                grid-column: span 1;
-                flex-direction: column;
-                gap: 12px;
-                padding: 15px;
-                text-align: center;
-                margin-bottom: 10px;
-            }
-
-            .rating-section .rating-label {
-                font-size: 0.9rem;
-            }
-
-            .star-rating {
-                gap: 8px;
-            }
-
-            .star {
-                width: 40px;
-                height: 40px;
-                line-height: 40px;
-                font-size: 1rem;
-            }
-
             .nav-controls {
-                bottom: 0;
-                gap: 12px;
-                width: 100%;
-                padding: 15px;
-                justify-content: center;
-                background: rgba(253, 248, 243, 0.95);
-                box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
+                padding: 12px 15px;
+                gap: 10px;
             }
 
-            .nav-btn {
-                padding: 10px 20px;
+            .nav-center {
+                gap: 6px;
+            }
+
+            .nav-rating {
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            .nav-rating-label {
+                font-size: 0.75rem;
+            }
+
+            .nav-star-rating {
+                gap: 4px;
+            }
+
+            .nav-star {
+                width: 32px;
+                height: 32px;
+                line-height: 32px;
                 font-size: 0.85rem;
             }
 
-            .slide-counter {
+            .nav-btn {
+                padding: 10px 16px;
                 font-size: 0.8rem;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
             }
 
-            .rating-required-hint {
+            .slide-counter {
                 font-size: 0.75rem;
-                margin-left: 0;
-                margin-top: 4px;
             }
 
             .keyboard-hint {
@@ -713,7 +691,7 @@
         @media (max-width: 380px) {
             .slide {
                 padding: 15px;
-                padding-bottom: 100px;
+                padding-bottom: 110px;
             }
 
             .title-slide h1 {
@@ -728,16 +706,20 @@
                 font-size: 1.1rem;
             }
 
-            .star {
-                width: 36px;
-                height: 36px;
-                line-height: 36px;
-                font-size: 0.9rem;
+            .nav-star {
+                width: 28px;
+                height: 28px;
+                line-height: 28px;
+                font-size: 0.75rem;
             }
 
             .nav-btn {
-                padding: 8px 16px;
-                font-size: 0.8rem;
+                padding: 8px 12px;
+                font-size: 0.75rem;
+            }
+
+            .nav-rating-label {
+                font-size: 0.7rem;
             }
         }
     </style>
@@ -798,16 +780,6 @@
                         <span class="skill-tag">Security</span>
                     </div>
                 </div>
-                <div class="rating-section">
-                    <div class="rating-label">Rate your interest <span>(required)</span></div>
-                    <div class="star-rating" data-rating="0">
-                        <span class="star" data-value="1">1</span>
-                        <span class="star" data-value="2">2</span>
-                        <span class="star" data-value="3">3</span>
-                        <span class="star" data-value="4">4</span>
-                        <span class="star" data-value="5">5</span>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -852,16 +824,6 @@
                         <span class="skill-tag">ERC721</span>
                         <span class="skill-tag">ERC20</span>
                         <span class="skill-tag">DeFi</span>
-                    </div>
-                </div>
-                <div class="rating-section">
-                    <div class="rating-label">Rate your interest <span>(required)</span></div>
-                    <div class="star-rating" data-rating="0">
-                        <span class="star" data-value="1">1</span>
-                        <span class="star" data-value="2">2</span>
-                        <span class="star" data-value="3">3</span>
-                        <span class="star" data-value="4">4</span>
-                        <span class="star" data-value="5">5</span>
                     </div>
                 </div>
             </div>
@@ -910,16 +872,6 @@
                         <span class="skill-tag">Architecture</span>
                     </div>
                 </div>
-                <div class="rating-section">
-                    <div class="rating-label">Rate your interest <span>(required)</span></div>
-                    <div class="star-rating" data-rating="0">
-                        <span class="star" data-value="1">1</span>
-                        <span class="star" data-value="2">2</span>
-                        <span class="star" data-value="3">3</span>
-                        <span class="star" data-value="4">4</span>
-                        <span class="star" data-value="5">5</span>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -964,16 +916,6 @@
                         <span class="skill-tag">ERC20</span>
                         <span class="skill-tag">Solidity</span>
                         <span class="skill-tag">DeFi</span>
-                    </div>
-                </div>
-                <div class="rating-section">
-                    <div class="rating-label">Rate your interest <span>(required)</span></div>
-                    <div class="star-rating" data-rating="0">
-                        <span class="star" data-value="1">1</span>
-                        <span class="star" data-value="2">2</span>
-                        <span class="star" data-value="3">3</span>
-                        <span class="star" data-value="4">4</span>
-                        <span class="star" data-value="5">5</span>
                     </div>
                 </div>
             </div>
@@ -1022,16 +964,6 @@
                         <span class="skill-tag">Game Theory</span>
                     </div>
                 </div>
-                <div class="rating-section">
-                    <div class="rating-label">Rate your interest <span>(required)</span></div>
-                    <div class="star-rating" data-rating="0">
-                        <span class="star" data-value="1">1</span>
-                        <span class="star" data-value="2">2</span>
-                        <span class="star" data-value="3">3</span>
-                        <span class="star" data-value="4">4</span>
-                        <span class="star" data-value="5">5</span>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -1076,16 +1008,6 @@
                         <span class="skill-tag">Account Abstraction</span>
                         <span class="skill-tag">Batch Operations</span>
                         <span class="skill-tag">Solidity</span>
-                    </div>
-                </div>
-                <div class="rating-section">
-                    <div class="rating-label">Rate your interest <span>(required)</span></div>
-                    <div class="star-rating" data-rating="0">
-                        <span class="star" data-value="1">1</span>
-                        <span class="star" data-value="2">2</span>
-                        <span class="star" data-value="3">3</span>
-                        <span class="star" data-value="4">4</span>
-                        <span class="star" data-value="5">5</span>
                     </div>
                 </div>
             </div>
@@ -1134,16 +1056,6 @@
                         <span class="skill-tag">Solidity</span>
                     </div>
                 </div>
-                <div class="rating-section">
-                    <div class="rating-label">Rate your interest <span>(required)</span></div>
-                    <div class="star-rating" data-rating="0">
-                        <span class="star" data-value="1">1</span>
-                        <span class="star" data-value="2">2</span>
-                        <span class="star" data-value="3">3</span>
-                        <span class="star" data-value="4">4</span>
-                        <span class="star" data-value="5">5</span>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -1190,16 +1102,6 @@
                         <span class="skill-tag">Cryptography</span>
                     </div>
                 </div>
-                <div class="rating-section">
-                    <div class="rating-label">Rate your interest <span>(required)</span></div>
-                    <div class="star-rating" data-rating="0">
-                        <span class="star" data-value="1">1</span>
-                        <span class="star" data-value="2">2</span>
-                        <span class="star" data-value="3">3</span>
-                        <span class="star" data-value="4">4</span>
-                        <span class="star" data-value="5">5</span>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -1218,10 +1120,21 @@
 
     <div class="nav-controls">
         <button class="nav-btn" onclick="changeSlide(-1)">Previous</button>
-        <span class="slide-counter">
-            <span id="current">1</span> / <span id="total">10</span>
-            <span class="rating-required-hint" id="ratingHint">Please rate to continue</span>
-        </span>
+        <div class="nav-center">
+            <div class="nav-rating" id="navRating">
+                <span class="nav-rating-label">Rate interest:</span>
+                <div class="nav-star-rating" id="navStarRating">
+                    <span class="nav-star" data-value="1">1</span>
+                    <span class="nav-star" data-value="2">2</span>
+                    <span class="nav-star" data-value="3">3</span>
+                    <span class="nav-star" data-value="4">4</span>
+                    <span class="nav-star" data-value="5">5</span>
+                </div>
+            </div>
+            <span class="slide-counter">
+                <span id="current">1</span> / <span id="total">10</span>
+            </span>
+        </div>
         <button class="nav-btn next-btn" onclick="changeSlide(1)">Next</button>
     </div>
 
@@ -1244,6 +1157,9 @@
             { issue: "crowdstake.fun #2", title: "Voting Module Implementation", url: "https://github.com/BreadchainCoop/crowdstake.fun/issues/2", desc: "EIP-712 signature voting with multiple power strategies" }
         ];
 
+        const navRating = document.getElementById('navRating');
+        const navStars = document.querySelectorAll('.nav-star');
+
         function isIssueSlide(slideIndex) {
             return slideIndex >= 1 && slideIndex <= 8;
         }
@@ -1258,16 +1174,30 @@
             return ratings[issueIndex] !== undefined && ratings[issueIndex] > 0;
         }
 
+        function updateNavRating() {
+            if (isIssueSlide(currentSlide)) {
+                navRating.classList.add('show');
+                const issueIndex = getCurrentIssueIndex();
+                const currentRating = ratings[issueIndex] || 0;
+                navStars.forEach(s => {
+                    if (parseInt(s.dataset.value) <= currentRating) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+            } else {
+                navRating.classList.remove('show');
+            }
+        }
+
         function updateNextButton() {
             const nextBtn = document.querySelector('.next-btn');
-            const hint = document.getElementById('ratingHint');
 
             if (isIssueSlide(currentSlide) && !hasRatedCurrentSlide()) {
                 nextBtn.disabled = true;
-                hint.classList.add('show');
             } else {
                 nextBtn.disabled = false;
-                hint.classList.remove('show');
             }
         }
 
@@ -1278,6 +1208,7 @@
             document.getElementById('current').textContent = currentSlide + 1;
             document.getElementById('progress').style.width = ((currentSlide + 1) / totalSlides * 100) + '%';
 
+            updateNavRating();
             updateNextButton();
 
             if (currentSlide === totalSlides - 1) {
@@ -1287,8 +1218,6 @@
 
         function changeSlide(direction) {
             if (direction === 1 && !hasRatedCurrentSlide()) {
-                const hint = document.getElementById('ratingHint');
-                hint.classList.add('show');
                 return;
             }
             showSlide(currentSlide + direction);
@@ -1302,48 +1231,21 @@
             }
         });
 
-        document.querySelectorAll('.issue-slide').forEach((slide, slideIndex) => {
-            const ratingContainer = slide.querySelector('.star-rating');
-            if (!ratingContainer) return;
+        navStars.forEach(star => {
+            star.addEventListener('click', () => {
+                const value = parseInt(star.dataset.value);
+                const issueIndex = getCurrentIssueIndex();
+                ratings[issueIndex] = value;
 
-            const stars = ratingContainer.querySelectorAll('.star');
-
-            stars.forEach(star => {
-                star.addEventListener('click', () => {
-                    const value = parseInt(star.dataset.value);
-                    ratingContainer.dataset.rating = value;
-                    ratings[slideIndex] = value;
-
-                    stars.forEach(s => {
-                        if (parseInt(s.dataset.value) <= value) {
-                            s.classList.add('active');
-                        } else {
-                            s.classList.remove('active');
-                        }
-                    });
-
-                    updateNextButton();
+                navStars.forEach(s => {
+                    if (parseInt(s.dataset.value) <= value) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
                 });
 
-                star.addEventListener('mouseenter', () => {
-                    const value = parseInt(star.dataset.value);
-                    stars.forEach(s => {
-                        if (parseInt(s.dataset.value) <= value) {
-                            s.style.color = 'var(--bread-orange)';
-                        }
-                    });
-                });
-
-                star.addEventListener('mouseleave', () => {
-                    const currentRating = parseInt(ratingContainer.dataset.rating) || 0;
-                    stars.forEach(s => {
-                        if (parseInt(s.dataset.value) <= currentRating) {
-                            s.style.color = 'var(--bread-orange)';
-                        } else {
-                            s.style.color = 'rgba(255, 255, 255, 0.4)';
-                        }
-                    });
-                });
+                updateNextButton();
             });
         });
 
