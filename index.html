@@ -262,6 +262,12 @@
             padding: 15px 20px;
         }
 
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
         .nav-center {
             display: flex;
             flex-direction: column;
@@ -604,41 +610,57 @@
             }
 
             .nav-controls {
+                flex-direction: column;
                 padding: 12px 15px;
                 gap: 10px;
             }
 
             .nav-center {
-                gap: 6px;
+                order: -1;
+                width: 100%;
             }
 
             .nav-rating {
-                flex-direction: column;
-                gap: 6px;
+                flex-direction: row;
+                justify-content: center;
+                gap: 10px;
+                width: 100%;
             }
 
             .nav-rating-label {
-                font-size: 0.75rem;
-            }
-
-            .nav-star-rating {
-                gap: 4px;
-            }
-
-            .nav-star {
-                width: 32px;
-                height: 32px;
-                line-height: 32px;
                 font-size: 0.85rem;
             }
 
+            .nav-star-rating {
+                gap: 6px;
+            }
+
+            .nav-star {
+                width: 38px;
+                height: 38px;
+                line-height: 38px;
+                font-size: 1rem;
+                -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
+            }
+
+            .nav-buttons {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                gap: 15px;
+            }
+
             .nav-btn {
-                padding: 10px 16px;
-                font-size: 0.8rem;
+                padding: 12px 20px;
+                font-size: 0.85rem;
+                flex: 1;
             }
 
             .slide-counter {
-                font-size: 0.75rem;
+                font-size: 0.8rem;
+                white-space: nowrap;
             }
 
             .keyboard-hint {
@@ -1119,7 +1141,6 @@
     <div class="keyboard-hint">Use arrow keys or buttons to navigate</div>
 
     <div class="nav-controls">
-        <button class="nav-btn" onclick="changeSlide(-1)">Previous</button>
         <div class="nav-center">
             <div class="nav-rating" id="navRating">
                 <span class="nav-rating-label">Rate interest:</span>
@@ -1131,11 +1152,14 @@
                     <span class="nav-star" data-value="5">5</span>
                 </div>
             </div>
+        </div>
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="changeSlide(-1)">Previous</button>
             <span class="slide-counter">
                 <span id="current">1</span> / <span id="total">10</span>
             </span>
+            <button class="nav-btn next-btn" onclick="changeSlide(1)">Next</button>
         </div>
-        <button class="nav-btn next-btn" onclick="changeSlide(1)">Next</button>
     </div>
 
     <script>
@@ -1231,21 +1255,31 @@
             }
         });
 
+        function handleStarRating(value) {
+            const issueIndex = getCurrentIssueIndex();
+            ratings[issueIndex] = value;
+
+            navStars.forEach(s => {
+                if (parseInt(s.dataset.value) <= value) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+
+            updateNextButton();
+        }
+
         navStars.forEach(star => {
-            star.addEventListener('click', () => {
-                const value = parseInt(star.dataset.value);
-                const issueIndex = getCurrentIssueIndex();
-                ratings[issueIndex] = value;
+            // Handle both click and touch
+            star.addEventListener('click', (e) => {
+                e.preventDefault();
+                handleStarRating(parseInt(star.dataset.value));
+            });
 
-                navStars.forEach(s => {
-                    if (parseInt(s.dataset.value) <= value) {
-                        s.classList.add('active');
-                    } else {
-                        s.classList.remove('active');
-                    }
-                });
-
-                updateNextButton();
+            star.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                handleStarRating(parseInt(star.dataset.value));
             });
         });
 
