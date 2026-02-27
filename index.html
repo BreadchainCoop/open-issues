@@ -500,6 +500,230 @@
         .rating-required-hint.show {
             opacity: 1;
         }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .slide {
+                padding: 20px;
+                padding-bottom: 100px;
+            }
+
+            .title-slide h1 {
+                font-size: 2rem;
+            }
+
+            .title-slide h2 {
+                font-size: 1.3rem;
+                margin-bottom: 25px;
+            }
+
+            .title-slide .subtitle {
+                font-size: 1rem;
+                padding: 0 10px;
+            }
+
+            .issue-header {
+                margin-bottom: 12px;
+            }
+
+            .repo-badge {
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+
+            .issue-number {
+                font-size: 0.85rem;
+            }
+
+            .issue-title {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+            }
+
+            .issue-title a {
+                display: inline;
+                gap: 6px;
+            }
+
+            .issue-title a::after {
+                width: 18px;
+                height: 18px;
+                vertical-align: middle;
+                margin-left: 6px;
+            }
+
+            .issue-content {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                overflow-y: auto;
+            }
+
+            .section {
+                padding: 15px;
+            }
+
+            .section h3 {
+                font-size: 0.8rem;
+                margin-bottom: 10px;
+            }
+
+            .section li {
+                font-size: 0.85rem;
+                padding: 5px 0;
+                padding-left: 15px;
+            }
+
+            .section li::before {
+                top: 10px;
+                width: 5px;
+                height: 5px;
+            }
+
+            .case-section {
+                grid-column: span 1;
+            }
+
+            .case-section p {
+                font-size: 0.85rem;
+                line-height: 1.6;
+            }
+
+            .skills-tags {
+                gap: 6px;
+                margin-top: 10px;
+            }
+
+            .skill-tag {
+                padding: 4px 10px;
+                font-size: 0.7rem;
+            }
+
+            .rating-section {
+                grid-column: span 1;
+                flex-direction: column;
+                gap: 12px;
+                padding: 15px;
+                text-align: center;
+            }
+
+            .rating-section .rating-label {
+                font-size: 0.9rem;
+            }
+
+            .star-rating {
+                gap: 8px;
+            }
+
+            .star {
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                font-size: 1rem;
+            }
+
+            .nav-controls {
+                bottom: 15px;
+                gap: 12px;
+                width: 100%;
+                padding: 0 15px;
+                justify-content: center;
+            }
+
+            .nav-btn {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+
+            .slide-counter {
+                font-size: 0.8rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .rating-required-hint {
+                font-size: 0.75rem;
+                margin-left: 0;
+                margin-top: 4px;
+            }
+
+            .keyboard-hint {
+                display: none;
+            }
+
+            .summary-slide h2 {
+                font-size: 1.6rem;
+                margin-bottom: 15px;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .summary-card {
+                padding: 12px;
+            }
+
+            .summary-card h4 {
+                font-size: 0.9rem;
+            }
+
+            .summary-card .repo {
+                font-size: 0.7rem;
+            }
+
+            .summary-card p {
+                font-size: 0.75rem;
+            }
+
+            .summary-card .rating-badge {
+                width: 32px;
+                height: 32px;
+                font-size: 1rem;
+            }
+
+            .copy-section {
+                margin-top: 15px;
+            }
+
+            .copy-btn {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 380px) {
+            .slide {
+                padding: 15px;
+                padding-bottom: 100px;
+            }
+
+            .title-slide h1 {
+                font-size: 1.6rem;
+            }
+
+            .title-slide h2 {
+                font-size: 1.1rem;
+            }
+
+            .issue-title {
+                font-size: 1.1rem;
+            }
+
+            .star {
+                width: 36px;
+                height: 36px;
+                line-height: 36px;
+                font-size: 0.9rem;
+            }
+
+            .nav-btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+        }
     </style>
 </head>
 <body>
