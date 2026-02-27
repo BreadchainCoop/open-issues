@@ -656,6 +656,8 @@
                 padding: 12px 20px;
                 font-size: 0.85rem;
                 flex: 1;
+                -webkit-tap-highlight-color: transparent;
+                touch-action: manipulation;
             }
 
             .slide-counter {
@@ -1154,11 +1156,11 @@
             </div>
         </div>
         <div class="nav-buttons">
-            <button class="nav-btn" onclick="changeSlide(-1)">Previous</button>
+            <button class="nav-btn" id="prevBtn">Previous</button>
             <span class="slide-counter">
                 <span id="current">1</span> / <span id="total">10</span>
             </span>
-            <button class="nav-btn next-btn" onclick="changeSlide(1)">Next</button>
+            <button class="nav-btn next-btn" id="nextBtn">Next</button>
         </div>
     </div>
 
@@ -1216,12 +1218,12 @@
         }
 
         function updateNextButton() {
-            const nextBtn = document.querySelector('.next-btn');
+            const btn = document.getElementById('nextBtn');
 
             if (isIssueSlide(currentSlide) && !hasRatedCurrentSlide()) {
-                nextBtn.disabled = true;
+                btn.disabled = true;
             } else {
-                nextBtn.disabled = false;
+                btn.disabled = false;
             }
         }
 
@@ -1281,6 +1283,24 @@
                 e.preventDefault();
                 handleStarRating(parseInt(star.dataset.value));
             });
+        });
+
+        // Navigation button handlers
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        prevBtn.addEventListener('click', () => changeSlide(-1));
+        nextBtn.addEventListener('click', () => changeSlide(1));
+
+        // Touch support for nav buttons
+        prevBtn.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            changeSlide(-1);
+        });
+
+        nextBtn.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            changeSlide(1);
         });
 
         function renderSummary() {
